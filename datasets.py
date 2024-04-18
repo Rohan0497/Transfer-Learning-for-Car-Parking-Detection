@@ -76,7 +76,7 @@ class Dataset(Dataset):
         root = tree.getroot()
         
         # Extract image width and height from the XML. 
-       
+        # The XML structure contains 'size' tag with 'width' and 'height' tags inside.
         size = root.find('size')
         if size is None:
             raise ValueError(f"XML {annot_filename} doesn't contain 'size' tag.")
