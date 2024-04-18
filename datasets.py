@@ -300,7 +300,7 @@ def compute_kmeans_aspect_ratios():
 
     # K-means Clustering
     X = np.column_stack((widths, heights))
-    kmeans = KMeans(n_clusters=5)  # Using 5 clusters as an example
+    kmeans = KMeans(n_clusters=5)  # Using elbow method found 5 clusters to be optimal 
     kmeans.fit(X)
     centroids = kmeans.cluster_centers_
 
