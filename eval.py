@@ -74,8 +74,7 @@ if __name__ == '__main__':
     print(f"mAP_50: {metric_summary['map_50']*100:.3f}")
     print(f"mAP_50_95: {metric_summary['map']*100:.3f}")
 
-    # #Save and plot precision_recall_curve
-    # plot_precision_recall_curve(preds, targets, NUM_CLASSES)
+
 
     # # Save and plot confusion matrix
     # plot_confusion_matrix(targets, preds,NUM_CLASSES)
