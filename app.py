@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template
 import os
 from flask_cors import CORS, cross_origin
 from src.utils.common import decodeImage
-from src.pipeline.infer_pipeline import InferencePipeline
+from src.pipeline.predict import InferencePipeline
 
 os.putenv('LANG', 'en_US.UTF-8')
 os.putenv('LC_ALL', 'en_US.UTF-8')
