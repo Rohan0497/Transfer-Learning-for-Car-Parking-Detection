@@ -1,67 +1,104 @@
----
+# SSD Object Detection System
 
-## SSD Object Detection System
+## Overview
+This repository provides a modular and scalable pipeline for training, inference, and evaluation of a **Single Shot MultiBox Detector (SSD)** for object detection. Built using **PyTorch** and **Torchvision**, the system is structured to ensure reproducibility, flexibility, and ease of deployment.
 
-This repository contains Python scripts for training, inference, and evaluation of a Single Shot MultiBox Detector (SSD) for object detection tasks. The SSD model is implemented using PyTorch and torchvision, and the code is organized into modular scripts for various tasks including model creation, data handling, training, inference, and evaluation.
+## Project Structure
 
-### Files
+```
+car_park_detection/
+├── config/                 # Configuration files
+│   ├── config.yaml         # Configuration file for training, inference, and evaluation
+│
+├── src/
+│   ├── components/         # Core model and processing modules
+│   │   ├── data_ingestion.py  # Data loading and preprocessing
+│   │   ├── model.py          # SSD model architecture
+│   │   ├── training.py       # Training process
+│   │   ├── evaluation.py     # Model evaluation
+│   │   ├── inference.py      # Inference process
+│   │
+│   ├── utils/               # Helper functions
+│   │   ├── common.py        # Logging, file handling, etc.
+│   │
+│   ├── pipeline/            # End-to-end workflow pipelines
+│   │   ├── stage_01_data_ingestion.py  # Training pipeline
+│   │   ├── stage_02_prepare_base_model.py   # Evaluation pipeline
+│   │   ├── stage_03_training.py  # Inference pipeline
+│   │   ├── stage_04_evaluation.py  # Inference pipeline
+│   │   ├── predict.py  # Inference pipeline
+│
+│   ├── entity/              # Configuration entities
+│   │   ├── config_entity.py  # Data class for configuration management
+│   │   ├── model_entity.py   # Data class for model configuration
+│
+│   ├── constants/           # Global constants
+│       ├── constants.py
 
-- **config.py**: Configuration file containing hyperparameters and settings.
-- **model.py**: Module for creating the SSD model.
-- **train.py**: Script for training the SSD model.
-- **datasets.py**: Module for creating datasets for training and validation.
-- **inference.py**: Module for performing inference with the trained SSD model.
-- **eval.py**: Module for evaluating the performance of the trained SSD model.
-- **utils.py**: Utility functions for averaging, saving models, and visualizing data.
-  
-
-### Usage
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/your-username/ssd-object-detection.git
-cd ssd-object-detection
+│   ├── config/              # Contains all configuration
+│       ├── configuration.py
+│
+├── tests/                   # Unit tests for different components
+├── requirements.txt         # List of dependencies
+├── params.yaml              # Training hyperparameters
+├── main.py                  # End-to-end pipeline execution
+├── app.py                   # Flask API for web-based interaction
+├── README.md                # Documentation
+└── LICENSE                  # Licensing information
 ```
 
-2. Install the required dependencies:
+## Setup & Installation
 
+### 1. Clone the repository
+```bash
+git clone https://github.com/your-username/car-park-detection.git
+cd car-park-detection
+```
+
+### 2. Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Run training:
-
+### 3. Train the model
 ```bash
-python train.py
+python main.py
+```
+This will execute all stages, including data ingestion, model training, and evaluation.
+
+### 4. Run inference on new images
+```bash
+python src/pipeline/infer_pipeline.py --image_path /path/to/image.jpg
 ```
 
-4. Run inference:
-
+### 5. Start the web-based API (Flask)
 ```bash
-python inference.py
+python app.py
 ```
 
-5. Evaluate model performance:
+## Configuration (`config.yaml` & `params.yaml`)
+- `config.yaml` defines **data paths, logging configurations, and directory structure**.
+- `params.yaml` contains **training hyperparameters** like learning rate, batch size, and number of epochs.
 
-```bash
-python eval.py
-```
+## Features
+✅ **Pretrained SSD Model**: Uses `torchvision.models.detection.ssd300_vgg16`.
+✅ **Modular Codebase**: Ensures easy customization and extension.
+✅ **Configurable Pipelines**: Modify training & inference settings using `config.yaml`.
+✅ **Web API for Inference**: Deploy with Flask for real-time detection.
+✅ **Logging & Debugging**: Integrated logging with structured error handling.
 
-6. Adjust hyperparameters and settings in `config.py` as needed.
+## Results & Evaluation
+The trained model outputs:
+- **Bounding boxes with class labels**
+- **Evaluation metrics (mAP, IoU, precision-recall)**
+- **Annotated images with detected objects**
 
-### Configuration (`config.py`)
+## Contributing
+Feel free to **fork, modify, and contribute** to this project. Issues and pull requests are welcome!
 
-- **Data Configuration**: Specify data paths, image sizes, and other data-related settings.
-- **Model Configuration**: Configure the SSD model architecture, number of classes, and other model-specific parameters.
-- **Training Configuration**: Set training hyperparameters such as learning rate, batch size, and number of epochs.
+## License
+This project is licensed under the **MIT License**.
 
-### Results
+---
+For any queries, reach out via [GitHub Issues](https://github.com/your-username/car-park-detection/issues) 🚀
 
-The scripts generate various outputs including trained model checkpoints, evaluation metrics such as mAP, and visualizations of inference results. Results can be further analyzed and visualized using custom plotting functions provided in the `utils.py` module.
-
-Feel free to use, modify, and distribute the code under the terms of the license. If you find this repository helpful, consider giving it a star!
-
---- 
-
-If you need more details or have any questions, please let me know!
