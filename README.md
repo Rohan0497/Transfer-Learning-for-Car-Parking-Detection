@@ -21,12 +21,12 @@ car_park_detection/
 │   ├── utils/               # Helper functions
 │   │   ├── common.py        # Logging, file handling, etc.
 │   │
-│   ├── pipeline/            # End-to-end workflow pipelines
-│   │   ├── stage_01_data_ingestion.py  # Training pipeline
-│   │   ├── stage_02_prepare_base_model.py   # Evaluation pipeline
-│   │   ├── stage_03_training.py  # Inference pipeline
-│   │   ├── stage_04_evaluation.py  # Inference pipeline
-│   │   ├── predict.py  # Inference pipeline
+│   ├── pipeline/                           # End-to-end workflow pipelines
+│   │   ├── stage_01_data_ingestion.py      # Training pipeline
+│   │   ├── stage_02_prepare_base_model.py  # Evaluation pipeline
+│   │   ├── stage_03_training.py            # Inference pipeline
+│   │   ├── stage_04_evaluation.py          # Inference pipeline
+│   │   ├── predict.py                      # Inference pipeline
 │
 │   ├── entity/              # Configuration entities
 │   │   ├── config_entity.py  # Data class for configuration management
