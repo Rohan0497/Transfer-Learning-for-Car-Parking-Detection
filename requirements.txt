@@ -1,0 +1,15 @@
+flask
+flask_cors
+numpy
+pandas
+torch
+torchvision
+pillow
+scikit-learn
+opencv-python
+matplotlib
+tqdm
+pyyaml
+joblib
+box
+ensure
