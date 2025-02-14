@@ -1,0 +1,36 @@
+# Configuration File for Car Park Detection Project
+
+data:
+  train_data_path: "data/train/"
+  test_data_path: "data/test/"
+  batch_size: 32
+  image_size: [640, 640]
+  augmentations: True
+
+model:
+  architecture: "ssd300_vgg16"
+  num_classes: 2
+  pretrained: True
+  learning_rate: 0.001
+  epochs: 30
+  optimizer: "adam"
+
+training:
+  checkpoint_dir: "outputs/checkpoints/"
+  log_dir: "outputs/logs/"
+  save_model_every: 5
+  early_stopping: True
+  patience: 5
+
+inference:
+  confidence_threshold: 0.5
+  iou_threshold: 0.4
+  model_checkpoint: "outputs/checkpoints/best_model.pth"
+
+logging:
+  log_level: "INFO"
+  log_file: "logs/training.log"
+
+deployment:
+  api_host: "0.0.0.0"
+  api_port: 8000
