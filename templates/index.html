@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Car Park Detection</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
+    <style>
+        body { background-color: #eff2f9; }
+        .title { color: #1b2d6b; font-size: 30px; font-weight: 700; text-align: center; }
+        .img-container { height: 300px; width: 300px; margin: auto; }
+        .image-box { height: 300px; width: 300px; border: 1px solid #1b2d6b; }
+        .image-box img { height: 300px; width: 300px; display: none; padding: 5px; }
+        .image-box #video { display: block; height: 300px; width: 300px; padding: 5px; }
+        .results-container { border: 1px solid #dedede; height: 310px; width: 100%; padding: 5px; overflow: auto; }
+        .btn-container { width: 325px; margin: auto; }
+        .btn { border-radius: 5px; }
+        #loading { position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; z-index: 9999; background: rgba(255, 255, 255, 0.7); }
+        .loader { border: 8px solid #f3f3f3; border-top: 8px solid #363e75; border-radius: 50%; width: 60px; height: 60px; margin: auto; animation: spin 2s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3 class="title py-4">Car Park Detection</h3>
+        <div class="row">
+            <div class="col-md-6 img-container">
+                <div class="image-box">
+                    <video autoplay id="video"></video>
+                    <img src="" id="photo">
+                    <canvas style="display:none;" id="canvas"></canvas>
+                </div>
+                <div class="btn-container mt-3">
+                    <form id="upload-form">
+                        <div class="input-group">
+                            <button type="button" class="btn btn-primary col-md-5" id="upload">Upload</button>
+                            <button id="predict" type="button" class="btn btn-success col-md-5">Predict</button>
+                        </div>
+                        <input type="hidden" id="api-url" value="/api/predict" />
+                        <input name="upload" type="file" id="file-input" hidden>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6 results-container">
+                <h5 class="text-center">Detection Results</h5>
+                <div id="prediction-results"></div>
+            </div>
+        </div>
+    </div>
+    <div id="loading" style="display: none;"><div class="loader"></div></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#loading").hide();
+            $('#predict').click(function() {
+                var url = $('#api-url').val();
+                $("#loading").show();
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    contentType: "application/json",
+                    success: function(response) {
+                        $("#prediction-results").html("<pre>" + JSON.stringify(response, undefined, 2) + "</pre>");
+                        $("#loading").hide();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
