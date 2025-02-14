@@ -1,10 +1,10 @@
 import torch
 from src.components.model import create_model
 from src.components.data_ingestion import create_dataloader
-from src.config.configuration import load_config
+from src.config.configuration import ConfigurationManager
 
 def train():
-    config = load_config()
+    config = ConfigurationManager().get_training_config()
     model = create_model(num_classes=2).to(torch.device("cuda" if torch.cuda.is_available() else "cpu"))
     optimizer = torch.optim.Adam(model.parameters(), lr=config["model"]["learning_rate"])
     train_loader = create_dataloader(config["data"]["train_data_path"], config["data"]["batch_size"])
