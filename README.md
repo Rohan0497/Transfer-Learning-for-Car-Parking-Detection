@@ -68,7 +68,7 @@ This will execute all stages, including data ingestion, model training, and eval
 
 ### 4. Run inference on new images
 ```bash
-python src/pipeline/infer_pipeline.py --image_path /path/to/image.jpg
+python src/pipeline/predict.py --image_path /path/to/image.jpg
 ```
 
 ### 5. Start the web-based API (Flask)
